@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Conversion</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <!-- normal script imports etc  -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#inputValue").on('input', function() {
+                UpdateTable($(this).val());
+            });
+        });
+
+        function UpdateTable(value) {
+            var base = $("#baseSelect").val();
+            Array.from($('[data-base]')).map(function(element) {
+                $(element).html(convertBase(value, base, $(element).data('base')));
+            });
+        }
+
+        function convertBase(value, from_base, to_base) {
+            var range = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/'.split('');
+            var from_range = range.slice(0, from_base);
+            var to_range = range.slice(0, to_base);
+
+            var dec_value = value.split('').reverse().reduce(function (carry, digit, index) {
+                if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
+                return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
+            }, 0);
+
+            var new_value = '';
+            while (dec_value > 0) {
+                new_value = to_range[dec_value % to_base] + new_value;
+                dec_value = (dec_value - (dec_value % to_base)) / to_base;
+            }
+            return new_value || '0';
+        }
+    </script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="base_conversion.html">Base Conversion</a></li>
+                    <li><a href="base_arithmetic.html">Base Arithmetic</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="configuration.html">Configuration</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="help.html">Help</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Welcome, User</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="panel panel-default" style="margin: 70px;">
+        <div class="panel-heading">
+            Base Conversion
+        </div>
+        <div class="panel-body">
+            <div class="input-group">
+                <span class="input-group-addon">Base</span>
+                <select id="baseSelect" class="form-control">
+                    <option value="10">Decimal</option>
+                    <option value="2">Binary</option>
+                    <option value="8">Octal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+                <span class="input-group-addon">Value</span>
+                <input id="inputValue" type="number" class="form-control"/>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td>Description</td>
+                    <td>Base</td>
+                    <td>Value</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Decimal</td>
+                    <td>10</td>
+                    <td data-base="10"></td>
+                </tr>
+                <tr>
+                    <td>Binary</td>
+                    <td>2</td>
+                    <td data-base="2"></td>
+                </tr>
+                <tr>
+                    <td>Octal</td>
+                    <td>8</td>
+                    <td data-base="8"></td>
+                </tr>
+                <tr>
+                    <td>Hexadecimal</td>
+                    <td>16</td>
+                    <td data-base="16"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
