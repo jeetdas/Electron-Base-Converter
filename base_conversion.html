@@ -18,6 +18,13 @@
             $("#inputValue").on('input', function() {
                 UpdateTable($(this).val());
             });
+            $("#baseSelect").on('input', function() {
+                if ($(this).val().toString() === "16") {
+                    $("#inputValue").attr('type', 'text');
+                } else {
+                    $("#inputValue").attr('type', 'number');
+                }
+            });
         });
 
         function UpdateTable(value) {
@@ -63,9 +70,7 @@
                     <li><a href="help.html">Help</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#">Welcome, User</a>
-            </li>
+            <li><a href="#">Welcome, User</a></li>
         </ul>
     </nav>
     <div class="panel panel-default" style="margin: 70px;">
