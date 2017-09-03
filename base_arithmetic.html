@@ -36,5 +36,88 @@
             </li>
         </ul>
     </nav>
+    <div class="panel panel-default" style="margin: 70px;">
+        <div class="panel-heading">
+            Base Conversion
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <ul>
+                            <li class="input-group">
+                                <label for="baseSelect">Base</label>
+                                <select id="baseSelect" class="form-control">
+                                    <option value="10">Decimal</option>
+                                    <option value="2">Binary</option>
+                                    <option value="8">Octal</option>
+                                    <option value="16">Hexadecimal</option>
+                                </select>
+                            </li>
+                            <li class="input-group">
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">+
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">-
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">*
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">/
+                                </label>
+                            </li>
+                        </ul>
+
+                    </td>
+                    <td>
+                        <ul>
+                            <li class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="number" class="form-control"/>
+                            </li>
+                            <span class="panel panel-default">+</span>
+                            <li class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="number" class="form-control"/>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td>Description</td>
+                    <td>Base</td>
+                    <td>Value</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Decimal</td>
+                    <td>10</td>
+                    <td data-base="10"></td>
+                </tr>
+                <tr>
+                    <td>Binary</td>
+                    <td>2</td>
+                    <td data-base="2"></td>
+                </tr>
+                <tr>
+                    <td>Octal</td>
+                    <td>8</td>
+                    <td data-base="8"></td>
+                </tr>
+                <tr>
+                    <td>Hexadecimal</td>
+                    <td>16</td>
+                    <td data-base="16"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
